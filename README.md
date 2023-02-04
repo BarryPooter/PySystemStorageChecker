@@ -28,6 +28,6 @@ To run the script twice a day, you can set up a cronjob by executing the followi
 
 and then adding the following line to the crontab file:
 
-    0 0,12 * * * /usr/bin/python3 /home/remy/PySystemStorageChecker/treshold_check.py
+    0 0,12 * * * /usr/bin/python3 /home/user/PySystemStorageChecker/treshold_check.py
 
 This will run the script at midnight and noon every day.
