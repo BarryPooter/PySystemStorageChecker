@@ -17,14 +17,17 @@ This script is designed to check the available storage on specified mounts and s
    - `DISCORD_WEBHOOK_URL`: The URL of the Discord webhook to send notifications to
 4. Install the required libraries using the following command:
     `pip install -r requirements.txt`
+
 5. Run the script using the following command:
     `python disk_usage_notifier.py`
 
 ## Cronjob
 To run the script twice a day, you can set up a cronjob by executing the following command:
-    `crontab -e`
+
+    crontab -e
 
 and then adding the following line to the crontab file:
-    `0 0,12 * * * python /path/to/disk_usage_notifier.py`
+
+    0 0,12 * * * /usr/bin/python3 /home/remy/PySystemStorageChecker/treshold_check.py
 
 This will run the script at midnight and noon every day.
