@@ -1,47 +1,30 @@
-# Python3 System Storage Checker
+# Python3 Disk Usage Notifier
 
-A Python3 script that checks if the available system storage (diskusage) is above a specified threshold and sends a notification to a Discord webhook if it's below that threshold.
+This script is designed to check the available storage on specified mounts and send a Discord notification if the available storage falls below a specified threshold.
 
 ## Requirements
-
 - Python 3
-- psutil
-- requests
-- python-dotenv
+- Requests library
+- Psutil library
+- Dotenv library
 
 ## Setup
+1. Clone the repository to your server
+2. Create a `.env` file in the same directory as the script
+3. Add the following environment variables to the `.env` file:
+   - `STORAGE_THRESHOLD`: The available storage threshold, in GB, below which a notification should be sent
+   - `MOUNTS_TO_CHECK`: A comma-separated list of mounts to check (defaults to `/` if not set)
+   - `DISCORD_WEBHOOK_URL`: The URL of the Discord webhook to send notifications to
+4. Install the required libraries using the following command:
+    `pip install -r requirements.txt`
+5. Run the script using the following command:
+    `python disk_usage_notifier.py`
 
-1. Clone this repository or download the script.
+## Cronjob
+To run the script twice a day, you can set up a cronjob by executing the following command:
+    `crontab -e`
 
-2. Install the required libraries by running the following command:
+and then adding the following line to the crontab file:
+    `0 0,12 * * * python /path/to/disk_usage_notifier.py`
 
-    pip install psutil requests python-dotenv
-
-3. Create a `.env` file in the same directory as the script and add the following lines, replacing `YOUR_DISCORD_WEBHOOK_URL` with your own Discord webhook URL and adjusting the value of `STORAGE_THRESHOLD` as desired:
-
-    DISCORD_WEBHOOK_URL=YOUR_DISCORD_WEBHOOK_URL
-    STORAGE_THRESHOLD=50
-
-4. Make the script executable with the following command:
-
-    chmod +x /path/to/script.py
-
-## Usage
-
-Run the script with the following command:
-
-    /usr/bin/python3 /path/to/script.py
-
-## Scheduling
-
-To run the script automatically, you can use a cronjob. To add a cronjob that runs the script twice a day, run the following command:
-
-    crontab -e
-
-This will open the crontab file in the default text editor. Add the following line to the file and save it:
-
-    0 0,12 * * * /usr/bin/python3 /path/to/script.py
-
-This cronjob runs the script at `00:00` and `12:00` every day.
-
-Note that the path to the `python3` binary and the script may be different on your system, so make sure to replace `/usr/bin/python3` and `/path/to/script.py` with the correct paths for your setup.
+This will run the script at midnight and noon every day.
